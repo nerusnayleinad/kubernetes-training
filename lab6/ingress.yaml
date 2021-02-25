@@ -1,0 +1,30 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: ingress
+spec:
+  tls:
+  - secretName: certs               #need the certs
+  rules:
+  - host: site1.domain.com
+    http:
+      paths:
+      - path: /v1/
+        backend:
+          serviceName: service1
+          servicePort: 8080
+      - path: /v2/
+        backend:
+          serviceName: service2
+          servicePort: 80
+  - host: site2.domain.com
+    http:
+      paths:
+      - path: /v1/
+        backend:
+          serviceName: service3
+          servicePort: 80
+      - path: /v2/
+        backend:
+          serviceName: service4
+          servicePort: 80
