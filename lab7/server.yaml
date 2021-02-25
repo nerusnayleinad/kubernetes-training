@@ -1,0 +1,58 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nginx-deployment
+  labels:
+    app: nginx
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: nginx
+      role: server
+  template:
+    metadata:
+      labels:
+        app: nginx
+        role: server
+    spec:
+      containers:
+      - name: nginx
+        image: nginx
+        ports:
+        - containerPort: 80
+          name: http
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+            - matchExpressions:
+              - key: schedule
+                operator: In
+                values:
+                - here
+          preferredDuringSchedulingIgnoredDuringExecution:
+          - weight: 1
+            preference:
+              matchExpressions:
+              - key: or
+                operator: In
+                values:
+                - here
+        podAntiAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+          - labelSelector:
+              matchExpressions:
+              - key: app
+                operator: In
+                values:
+                - nginx
+            topologyKey: "kubernetes.io/hostname"
+      tolerations:
+      - effect: NoExecute		#NoSchedule, PreferNoSchedule
+        key: node
+        operator: Equal
+        value: not-ready
+        tolerationSeconds: 120
+
+# kubectl taint node NODE node=not-ready:NoExecute
