@@ -22,7 +22,7 @@ spec:
           name: http
         volumeMounts:
         - name: nginx-lp
-          mountPath: /usr/share/nginx/html/
+          mountPath: /usr/share/nginx/html/v1/
         - name: nginx-config
           mountPath: /etc/nginx/conf.d/
       volumes:
@@ -81,7 +81,7 @@ spec:
           name: http
         volumeMounts:
         - name: nginx-lp
-          mountPath: /usr/share/nginx/html/
+          mountPath: /usr/share/nginx/html/v2/
       volumes:
       - name: nginx-lp
         configMap:
@@ -132,7 +132,7 @@ spec:
           name: http
         volumeMounts:
         - name: nginx-lp
-          mountPath: /usr/share/nginx/html/
+          mountPath: /usr/share/nginx/html/v1/
         - name: nginx-config
           mountPath: /etc/nginx/conf.d/
       volumes:
@@ -191,7 +191,7 @@ spec:
           name: http
         volumeMounts:
         - name: nginx-lp
-          mountPath: /usr/share/nginx/html/
+          mountPath: /usr/share/nginx/html/v2/
       volumes:
       - name: nginx-lp
         configMap:
