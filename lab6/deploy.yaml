@@ -138,7 +138,7 @@ spec:
       volumes:
       - name: nginx-lp
         configMap:
-          name: nginx-lp1
+          name: nginx-lp3
           items:
           - key: page
             path: index.html
@@ -195,7 +195,7 @@ spec:
       volumes:
       - name: nginx-lp
         configMap:
-          name: nginx-lp2
+          name: nginx-lp4
           items:
           - key: page
             path: index.html
